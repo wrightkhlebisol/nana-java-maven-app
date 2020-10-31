@@ -16,8 +16,7 @@ pipeline {
                     echo "Hello, ${MS1}. Hello, ${MS2}. Hello, ${MS3}. Hello, ${MS4}"
                     MS1_TO_DEPLOY = MS1
                     MS2_TO_DEPLOY = MS2
-                    env.MS3_TO_DEPLOY = MS3
-                    env.MS4_TO_DEPLOY = MS4      
+                    env.MS3_TO_DEPLOY = MS3     
                 }
             }
         }
@@ -33,7 +32,6 @@ pipeline {
                     echo "Hello, ${MS5}."  
                     env.MS5_TO_DEPLOY = MS5
                     echo "${MS1_TO_DEPLOY}"
-                    echo "${MS4_TO_DEPLOY}"
                     echo "${MS5_TO_DEPLOY}"  
                 }
             }
