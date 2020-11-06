@@ -2,6 +2,9 @@ def gv
 
 pipeline {
     agent any
+    tools {
+        maven: 'my-mvn'
+    }
     stages {
         stage("init") {
             steps {
@@ -10,17 +13,22 @@ pipeline {
                 }
             }
         }
-        stage("build") {
+        stage("build jar") {
             steps {
                 script {
                     gv.buildApp()
+                    mvn package
                 }
             }
         }
-        stage("test") {
+        stage("build image") {
             steps {
                 script {
-                    gv.testApp()
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh("docker build -t nanajanashia/demo-app:jma-2.0 .")
+                        sh("echo $PASS | docker login -u $USER --password-stdin")
+                        sh("docker push nanajanashia/demo-app:jma-2.0")
+                    }
                 }
             }
         }
