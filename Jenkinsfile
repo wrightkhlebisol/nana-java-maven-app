@@ -16,8 +16,8 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    gv.buildApp();
-                    mvn package
+                    gv.buildApp()
+                    sh 'mvn package'
                 }
             }
         }
