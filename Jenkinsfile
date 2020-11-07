@@ -1,5 +1,5 @@
-@Library('jenkins-shared-library')
-def ns
+@Library('jenkins-shared-library')_
+
 pipeline {
     agent none
     stages {
