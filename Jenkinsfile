@@ -1,7 +1,7 @@
 @Library('jenkins-shared-library')_
 
 pipeline {
-    agent none
+    agent any
     tools {
         maven 'Maven'
     }
