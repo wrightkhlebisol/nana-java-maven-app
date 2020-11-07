@@ -5,9 +5,11 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                echo "Testing the application..."
-                echo "Executing pipeline for branch $BRANCH_NAME"
-                buildJar
+                script {
+                    echo "Testing the application..."
+                    echo "Executing pipeline for branch $BRANCH_NAME"
+                    buildJar
+                }
             }
         }
         stage('build') {
