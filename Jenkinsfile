@@ -9,28 +9,21 @@ pipeline {
         stage('test') {
             steps {
                 script {
-                    echo "Testing the application..."
-                    // echo "Executing pipeline for branch $BRANCH_NAME"
                     buildJar()
                 }
             }
         }
         stage('build') {
-            when {
-                expression {
-                   BRANCH_NAME == 'master' 
-                }
-            }
             steps {
                 script {   
-                    echo "Building the application..."    
+                    buildDockerImage 'nanajanashia/demo-app:jma-2.0'
                 }
             }
         }
         stage('deploy') {
             when {
                 expression {
-                   BRANCH_NAME == 'master' 
+                   BRANCH_NAME == 'master'
                 }
             }
             steps {
