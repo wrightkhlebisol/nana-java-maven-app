@@ -2,6 +2,9 @@
 
 pipeline {
     agent none
+    tools {
+        maven 'Maven'
+    }
     stages {
         stage('test') {
             steps {
