@@ -16,7 +16,7 @@ pipeline {
         stage('build') {
             steps {
                 script {   
-                    buildDockerImage 'nanajanashia/demo-app:jma-2.0'
+                    buildDockerImage 'nanajanashia/demo-app:jma-3.0'
                 }
             }
         }
