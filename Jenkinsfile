@@ -1,6 +1,4 @@
-libraries {
-     lib('jenkins-shared-library')
-}
+@Library('jenkins-shared-library')
 
 pipeline {
     agent none
