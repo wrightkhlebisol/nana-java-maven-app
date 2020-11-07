@@ -1,3 +1,7 @@
+libraries {
+     lib('jenkins-shared-library')
+}
+
 pipeline {
     agent none
     stages {
