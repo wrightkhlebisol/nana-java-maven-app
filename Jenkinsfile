@@ -13,9 +13,7 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                script {
-                    buildJar()
-                }
+                buildJar()
             }
         }
         stage('build') {
