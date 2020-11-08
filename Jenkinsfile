@@ -22,7 +22,8 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                    buildDockerImageFromClass 'nanajanashia/demo-app:jma-3.0'
+                    echo "blba"
+                    //buildDockerImageFromClass 'nanajanashia/demo-app:jma-3.0'
                 }
             }
         }
