@@ -14,6 +14,7 @@ pipeline {
         stage('test') {
             steps {
                 buildJar()
+                sh 'docker --version'
             }
         }
         stage('build') {
