@@ -20,7 +20,7 @@ pipeline {
         stage('build') {
             steps {
                 script {   
-                    buildDockerImage 'nanajanashia/demo-app:jma-3.0'
+                    buildDockerImageWithClass 'nanajanashia/demo-app:jma-3.0'
                 }
             }
         }
