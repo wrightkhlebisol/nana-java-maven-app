@@ -1,7 +1,9 @@
+#!/usr/bin/env groovy
+
 library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
     [$class: 'GitSCMSource',
      remote: 'https://gitlab.com/nanuchi/jenkins-shared-library.git',
-     credentialsId: 'gitlab-credentials'   
+     credentialsId: 'gitlab-credentials'
     ]
 )
 
@@ -19,7 +21,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                script {   
+                script {
                     buildDockerImageFromClass 'nanajanashia/demo-app:jma-3.0'
                 }
             }
