@@ -1,4 +1,9 @@
-@Library('jenkins-shared-library')_
+Library identifier: 'jenkins-shared-library', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+     remote: 'https://gitlab.com/nanuchi/jenkins-shared-library.git',
+     credentials: 'gitlab-credentials'   
+    ]
+)
 
 pipeline {
     agent any
