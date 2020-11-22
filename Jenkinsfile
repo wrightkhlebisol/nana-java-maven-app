@@ -39,7 +39,7 @@ pipeline {
                 script {
                    
                    sshagent(['ec2-server-key']) {
-                       sh ".test.sh"
+                       sh "./test.sh"
                    }
                 }
             }
