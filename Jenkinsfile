@@ -37,8 +37,8 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                   
                    sshagent(['ec2-server-key']) {
+                       sh "chmod -x test.sh"
                        sh "./test.sh"
                    }
                 }
