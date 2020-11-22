@@ -1,1 +1,1 @@
-cp docker-compose.yaml ec2-user@35.180.251.121:/home/ec2-user 
+docker --version
