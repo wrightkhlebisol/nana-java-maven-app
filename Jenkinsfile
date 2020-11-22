@@ -12,30 +12,36 @@ pipeline {
     tools {
         maven 'Maven'
     }
+    environment {
+        IMAGE_NAME = 'nanajanashia/demo-app:java-maven-1.0'
+    }
     stages {
-        stage('test') {
+        stage('build app') {
             steps {
-                buildJar()
-                sh 'docker --version'
+               script {
+                  echo 'building application jar...'
+                  buildJar()
+               }
             }
         }
-        stage('build') {
+        stage('build image') {
             steps {
                 script {
-                    echo "blba"
-                    //buildDockerImageFromClass 'nanajanashia/demo-app:jma-3.0'
+                   echo 'building docker image...'
+                   buildImage(imageName)
+                   dockerLogin()
+                   dockerPush(imageName)
                 }
             }
         }
         stage('deploy') {
-            when {
-                expression {
-                   BRANCH_NAME == 'master'
-                }
-            }
             steps {
                 script {
-                    echo "Deploying the application..."
+                   echo 'deploying docker image to EC2...'
+                   def dockerCmd = "docker run -p 3080:3080 -d $IMAGE_NAME"
+                   sshagent(['ec2-server-key']) {
+                       sh "ssh -o StrictHostKeyChecking=no ec2-user@35.180.251.121 ${dockerCmd}"
+                   }
                 }
             }
         }
