@@ -20,7 +20,7 @@ pipeline {
             steps {
                script {
                   echo 'building application jar...'
-                  
+                  buildJar()
                }
             }
         }
@@ -28,17 +28,20 @@ pipeline {
             steps {
                 script {
                    echo 'building docker image...'
-                   
+                   buildImage(env.IMAGE_NAME)
+                   dockerLogin()
+                   dockerPush(env.IMAGE_NAME)
                 }
             }
         }
         stage('deploy') {
             steps {
                 script {
-                   def executeScript = "bash ./test.sh" 
+                   echo 'deploying docker image to EC2...'
+                   def dockerComposeCmd = "docker-compose -f docker-compose.yaml up"
                    sshagent(['ec2-server-key']) {
-                       sh "scp test.sh ec2-user@35.180.251.121:/home/ec2-user"
-                       sh "ssh -o StrictHostKeyChecking=no ec2-user@35.180.251.121 ${executeScript}"
+                       sh "scp docker-compose.yaml ec2-user@35.180.251.121:/home/ec2-user"
+                       sh "ssh -o StrictHostKeyChecking=no ec2-user@35.180.251.121 ${dockerComposeCmd}"
                    }
                 }
             }
