@@ -20,7 +20,7 @@ pipeline {
             steps {
                script {
                   echo 'building application jar...'
-                  buildJar()
+                  
                }
             }
         }
@@ -28,17 +28,16 @@ pipeline {
             steps {
                 script {
                    echo 'building docker image...'
-                   buildImage(env.IMAGE_NAME)
-                   dockerLogin()
-                   dockerPush(env.IMAGE_NAME)
+                   
                 }
             }
         }
         stage('deploy') {
             steps {
                 script {
+                   def executeScript = "bash ./test.sh" 
                    sshagent(['ec2-server-key']) {
-                       sh "bash ./test.sh"
+                       sh "ssh -o StrictHostKeyChecking=no ec2-user@35.180.251.121 ${executeScript}"
                    }
                 }
             }
