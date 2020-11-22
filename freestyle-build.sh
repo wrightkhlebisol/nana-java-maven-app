@@ -1,2 +1,2 @@
-# npm --version
-# docker --version
+docker --version
+echo 'blaaaa'
