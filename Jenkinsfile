@@ -38,8 +38,7 @@ pipeline {
             steps {
                 script {
                    sshagent(['ec2-server-key']) {
-                       sh "chmod -x test.sh"
-                       sh "./test.sh"
+                       sh "bash ./test.sh"
                    }
                 }
             }
