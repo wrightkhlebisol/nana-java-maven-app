@@ -28,9 +28,9 @@ pipeline {
             steps {
                 script {
                    echo 'building docker image...'
-                   buildImage(imageName)
+                   buildImage(env.IMAGE_NAME)
                    dockerLogin()
-                   dockerPush(imageName)
+                   dockerPush(env.IMAGE_NAME)
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                    echo 'deploying docker image to EC2...'
-                   def dockerCmd = "docker run -p 3080:3080 -d $IMAGE_NAME"
+                   def dockerCmd = "docker run -p 3080:3080 -d ${IMAGE_NAME}"
                    sshagent(['ec2-server-key']) {
                        sh "ssh -o StrictHostKeyChecking=no ec2-user@35.180.251.121 ${dockerCmd}"
                    }
