@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        // git config for the first time run
+                        // git config here for the first time run
                         sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/nanuchi/java-maven-app.git"
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
